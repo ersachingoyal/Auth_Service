@@ -2,6 +2,10 @@
 const {
   Model
 } = require('sequelize');
+
+const bcrypt = require('bcrypt');
+const { SALT } = require('../config/serverConfig');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -33,5 +37,11 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
   });
+
+  User.beforeCreate((user) => {  // the user object here is the user that we will get after the user is created, this function will run before actually the user is created
+    const encryptesPassword = bcrypt.hashSync(user.password, SALT); //salt is an extra layer of data over the encryption algorithm
+    user.password = encryptesPassword;
+  })
+
   return User;
 };
