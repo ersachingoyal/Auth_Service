@@ -1,3 +1,5 @@
 after setting up the basic project , wrote the api for creating the user, but there was one issue that 
 password was directly visible in the database, so we needed to encrypt it somehow.
 for this we will use bcrypt -> npm i bcrypt, we will do this encrytpion in the user model js file only, before the user is actually created
+
+for sigin process we will generate a token which we will assign to the user , for the we will use JSON web token(JWT)
