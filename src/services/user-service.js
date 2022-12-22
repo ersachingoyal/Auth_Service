@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const UserRepository = require('../repository/user-repository');
+const bcrypt = require('bcrypt')
 
 const { JWT_KEY } = require('../config/serverConfig');
 
@@ -34,6 +35,16 @@ class UserService {
             return response;
         } catch (error) {
             console.log("Something went wrong in token validation", error);
+            throw error;
+        }
+    }
+
+    // on sigin we user will send plain password, but we are storing the encrypted password in our db , so we need decrypt that
+    checkPassword(userInputPlainPassword, encryptedPassword){
+        try {
+            return bcrypt.compareSync(userInputPlainPassword, encryptedPassword);
+        } catch (error) {
+            console.log("Something went wrong in password comparision");
             throw error;
         }
     }
