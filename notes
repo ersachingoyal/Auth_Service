@@ -3,3 +3,7 @@ password was directly visible in the database, so we needed to encrypt it someho
 for this we will use bcrypt -> npm i bcrypt, we will do this encrytpion in the user model js file only, before the user is actually created
 
 for sigin process we will generate a token which we will assign to the user , for the we will use JSON web token(JWT)
+
+next for authorisation we need to prepare a role model, that will define what role a particular user have,
+so this will be a many to many assosciation because a user can have many roles and a role can belongs to multiple user
+for creating many to many relationship we do this through a third table called through table, in that we store the id of both the tables
