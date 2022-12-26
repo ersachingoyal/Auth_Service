@@ -27,7 +27,10 @@ const create = async(req, res) => {
 
 const signIn = async (req, res) => {
   try {
-    const response = await userService.signIn(req.body.email,req.body.password);
+    const response = await userService.signIn(
+      req.body.email,
+      req.body.password
+    );
     return res.status(200).json({
       success: true,
       data: response,
@@ -36,14 +39,14 @@ const signIn = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({
-      message: "Something went wrong",
+    return res.status(error.statusCode).json({
+      message: error.message,
       data: {},
       success: false,
-      err: error,
+      err: error.explanation,
     });
   }
-}
+};
 
 // we will use this method to check if the user is authencticated to access a particular thing or not
 const isAuthenticated = async(req, res) =>{
