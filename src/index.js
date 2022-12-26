@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 
 const { PORT } = require('./config/serverConfig');
 const apiRoutes = require('./routes/index');
+// const sequelize = require('sequelize')
 // const db = require('./models/index');
 // const { User, Role } = require('./models/index');
 
@@ -17,7 +18,7 @@ const prepareAndStartServer = () =>{
 
     app.listen(PORT, async () =>{        
         console.log(`Server started at ${PORT}`);
-        // db.sequelize.sync();
+        // db.sequelize.sync({alter:true});
 
         // const u1 = await User.findByPk(1);
         // // const r1 = await Role.findByPk(1); //id 1 is the admin role;
